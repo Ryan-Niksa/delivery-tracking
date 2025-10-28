@@ -1,11 +1,8 @@
+import os
 from fastapi import FastAPI
-from sqlalchemy import create_engine
-from .config import DATABASE_URL
+import uvicorn
 
 app = FastAPI()
 
-engine = create_engine(DATABASE_URL)
-
-@app.get("/")
-async def read_root():
-    return {"message": "Hello, World!"}
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
